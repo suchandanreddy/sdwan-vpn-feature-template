@@ -1,0 +1,279 @@
+{
+  "templateName": "{{config.ospf_template_name}}",
+  "templateDescription": "{{config.ospf_template_name}}",
+  "templateType": "ospf",
+  "templateMinVersion": "15.0.0",
+  "transitionInProgress": true,
+  "viewMode": "add",
+  "deviceType": [
+    "vedge-cloud"
+  ],
+  "deviceModels": [
+    {
+      "name": "vedge-cloud",
+      "displayName": "vEdge Cloud",
+      "deviceType": "vedge",
+      "isCliSupported": true,
+      "isCiscoDeviceModel": false
+    }
+  ],
+  "templateUrl": "/app/configuration/template/feature/templates/ospf-15.0.0.html",
+  "removeTableRow": {},
+  "templateDefinition": {
+    "ospf": {
+      "router-id": {
+        "vipObjectType": "object",
+        "vipType": "constant",
+        "vipValue": "{{config.ospf_router_id}}",
+        "vipVariableName": "ospf_router_id"
+      },
+      "auto-cost": {
+        "reference-bandwidth": {
+          "vipObjectType": "object",
+          "vipType": "ignore",
+          "vipValue": 100,
+          "vipVariableName": "ospf_reference_bandwidth"
+        }
+      },
+      "compatible": {
+        "rfc1583": {
+          "vipObjectType": "object",
+          "vipType": "ignore",
+          "vipValue": "true",
+          "vipVariableName": "ospf_rfc1583"
+        }
+      },
+      "distance": {
+        "external": {
+          "vipObjectType": "object",
+          "vipType": "ignore",
+          "vipValue": 110,
+          "vipVariableName": "ospf_distance_external"
+        },
+        "inter-area": {
+          "vipObjectType": "object",
+          "vipType": "ignore",
+          "vipValue": 110,
+          "vipVariableName": "ospf_distance_inter_area"
+        },
+        "intra-area": {
+          "vipObjectType": "object",
+          "vipType": "ignore",
+          "vipValue": 110,
+          "vipVariableName": "ospf_distance_intra_area"
+        }
+      },
+      "timers": {
+        "spf": {
+          "delay": {
+            "vipObjectType": "object",
+            "vipType": "ignore",
+            "vipValue": 200,
+            "vipVariableName": "ospf_delay"
+          },
+          "initial-hold": {
+            "vipObjectType": "object",
+            "vipType": "ignore",
+            "vipValue": 1000,
+            "vipVariableName": "ospf_initial_hold"
+          },
+          "max-hold": {
+            "vipObjectType": "object",
+            "vipType": "ignore",
+            "vipValue": 10000,
+            "vipVariableName": "ospf_max_hold"
+          }
+        }
+      },
+      "redistribute": {
+        "vipType": "constant",
+        "vipValue": [
+          {
+            "protocol": {
+              "vipObjectType": "object",
+              "vipType": "constant",
+              "vipValue": "omp",
+              "vipVariableName": "ospf_redistribute_protocol"
+            },
+            "route-policy": {
+              "vipObjectType": "object",
+              "vipType": "ignore",
+              "vipVariableName": "ospf_redistribute_route_policy"
+            },
+            "priority-order": [
+              "protocol",
+              "route-policy"
+            ]
+          }
+        ],
+        "vipObjectType": "tree",
+        "vipPrimaryKey": [
+          "protocol"
+        ]
+      },
+      "max-metric": {
+        "router-lsa": {
+          "vipType": "ignore",
+          "vipValue": [],
+          "vipObjectType": "tree",
+          "vipPrimaryKey": [
+            "ad-type"
+          ]
+        }
+      },
+      "area": {
+        "vipType": "constant",
+        "vipValue": [
+          {
+            "a-num": {
+              "originalDefaultOption": "constant",
+              "dataPath": [],
+              "vipObjectType": "object",
+              "vipValue": {{config.ospf_area_number}},
+              "vipType": "constant",
+              "vipVariableName": "ospf_area_a_num"
+            },
+            "stub": {
+              "no-summary": {
+                "vipType": "ignore",
+                "vipObjectType": "node-only"
+              }
+            },
+            "nssa": {
+              "no-summary": {
+                "vipType": "ignore",
+                "vipObjectType": "node-only"
+              },
+              "translate": {
+                "vipType": "ignore",
+                "vipObjectType": "object"
+              }
+            },
+            "interface": {
+              "vipType": "constant",
+              "vipValue": [
+                {
+                  "name": {
+                    "originalDefaultOption": "constant",
+                    "dataPath": [],
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipVariableName": "ospf_name",
+                    "vipValue": "{{config.service_vpn_interface_id}}"
+                  },
+                  "hello-interval": {
+                    "originalDefaultOption": "ignore",
+                    "dataPath": [],
+                    "vipObjectType": "object",
+                    "vipValue": 10,
+                    "vipType": "ignore",
+                    "vipVariableName": "ospf_hello_interval"
+                  },
+                  "dead-interval": {
+                    "originalDefaultOption": "ignore",
+                    "dataPath": [],
+                    "vipObjectType": "object",
+                    "vipValue": 40,
+                    "vipType": "ignore",
+                    "vipVariableName": "ospf_dead_interval"
+                  },
+                  "retransmit-interval": {
+                    "originalDefaultOption": "ignore",
+                    "dataPath": [],
+                    "vipObjectType": "object",
+                    "vipValue": 5,
+                    "vipType": "ignore",
+                    "vipVariableName": "ospf_retransmit_interval"
+                  },
+                  "cost": {
+                    "originalDefaultOption": "ignore",
+                    "dataPath": [],
+                    "vipObjectType": "object",
+                    "vipType": "ignore",
+                    "vipVariableName": "ospf_cost"
+                  },
+                  "priority": {
+                    "originalDefaultOption": "ignore",
+                    "dataPath": [],
+                    "vipObjectType": "object",
+                    "vipValue": 1,
+                    "vipType": "ignore",
+                    "vipVariableName": "ospf_priority"
+                  },
+                  "network": {
+                    "originalDefaultOption": "ignore",
+                    "dataPath": [],
+                    "vipObjectType": "object",
+                    "vipValue": "broadcast",
+                    "vipType": "ignore",
+                    "vipVariableName": "ospf_network"
+                  },
+                  "passive-interface": {
+                    "originalDefaultOption": "ignore",
+                    "dataPath": [],
+                    "vipObjectType": "node-only",
+                    "vipValue": "false",
+                    "vipType": "ignore",
+                    "vipVariableName": "ospf_passive_interface"
+                  },
+                  "authentication": {
+                    "type": {
+                      "vipObjectType": "object",
+                      "vipType": "ignore",
+                      "vipValue": "_empty",
+                      "vipVariableName": "ospf_authentication_type"
+                    },
+                    "authentication-key": {
+                      "vipObjectType": "object",
+                      "vipType": "ignore",
+                      "vipValue": "",
+                      "vipVariableName": "ospf_authentication_key"
+                    },
+                    "message-digest": {
+                      "message-digest-key": {
+                        "vipObjectType": "object",
+                        "vipType": "ignore",
+                        "vipValue": "",
+                        "vipVariableName": "ospf_message_digest_key"
+                      },
+                      "md5": {
+                        "vipObjectType": "object",
+                        "vipType": "ignore",
+                        "vipValue": "",
+                        "vipVariableName": "ospf_md5"
+                      }
+                    }
+                  },
+                  "priority-order": [
+                    "name",
+                    "hello-interval",
+                    "dead-interval",
+                    "retransmit-interval",
+                    "cost",
+                    "priority",
+                    "network",
+                    "passive-interface",
+                    "authentication"
+                  ]
+                }
+              ],
+              "vipObjectType": "tree",
+              "vipPrimaryKey": [
+                "name"
+              ]
+            },
+            "priority-order": [
+              "a-num",
+              "interface"
+            ]
+          }
+        ],
+        "vipObjectType": "tree",
+        "vipPrimaryKey": [
+          "a-num"
+        ]
+      }
+    }
+  },
+  "factoryDefault": false
+}
