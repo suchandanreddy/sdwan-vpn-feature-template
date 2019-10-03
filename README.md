@@ -1,4 +1,4 @@
-#	Usecase-2: Configuration API's
+# Configuration APIs
 
 ## Objective 
 
@@ -28,16 +28,9 @@ interface_ip_address: '10.2.10.250/24'
 ospf_router_id: '10.2.0.2'
 vpn_default_gw: '10.1.10.1'
 ospf_area_number: '0'
-
 ```
 
 While building the templates, we can load the content from above `.yaml` file 
-
-### Code Components
-
-Please note that this is a FYI section which includes code snippets and structure of command `create-service-vpn` in CLI based python application script **configure-vpn-template.py**. 
-
-Using POST request to URL "template/feature/" to create the template.
 
 **Step-1:**
 
